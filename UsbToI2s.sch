@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:AudioDAC-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -310,11 +309,11 @@ RSTB
 Wire Wire Line
 	7400 2800 7750 2800
 $Comp
-L Connector:Conn_01x05_Male J?
+L Connector:Conn_01x06_Male J?
 U 1 1 5C685CE0
 P 9650 3750
 F 0 "J?" H 9623 3773 50  0000 R CNN
-F 1 "Conn_01x05_Male" H 9623 3682 50  0000 R CNN
+F 1 "Conn_01x06_Male" H 9623 3682 50  0000 R CNN
 F 2 "" H 9650 3750 50  0001 C CNN
 F 3 "~" H 9650 3750 50  0001 C CNN
 	1    9650 3750
@@ -476,4 +475,27 @@ Wire Wire Line
 	9400 3950 9450 3950
 Text GLabel 9400 3950 0    39   Output ~ 0
 GND
+$Comp
+L Device:Jumper JP?
+U 1 1 5C673436
+P 9050 4300
+F 0 "JP?" H 9050 4564 50  0000 C CNN
+F 1 "Jumper" H 9050 4473 50  0000 C CNN
+F 2 "" H 9050 4300 50  0001 C CNN
+F 3 "~" H 9050 4300 50  0001 C CNN
+	1    9050 4300
+	1    0    0    -1  
+$EndComp
+Text GLabel 8650 4300 0    39   Output ~ 0
+VUSB_IN
+Wire Wire Line
+	8650 4300 8750 4300
+Wire Wire Line
+	9350 4050 9350 4300
+Wire Wire Line
+	9350 4050 9450 4050
+Text GLabel 9350 4200 2    39   Output ~ 0
+VUSB_OUT
+Text Notes 8900 4700 0    39   ~ 0
+NOTE:\nThe I2S signals are at logic level +3V3. The 5V\noutput is simply a way to pass through USB power\nfor later stages.
 $EndSCHEMATC

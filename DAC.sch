@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:AudioDAC-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -612,33 +611,427 @@ Wire Wire Line
 Wire Wire Line
 	4450 4200 4800 4200
 Connection ~ 4800 4200
-$Comp
-L Connector:Conn_01x04_Female J?
-U 1 1 5C689FB4
-P 2850 3150
-F 0 "J?" H 2744 3435 50  0000 C CNN
-F 1 "Conn_01x04_Female" H 2744 3344 50  0000 C CNN
-F 2 "" H 2850 3150 50  0001 C CNN
-F 3 "~" H 2850 3150 50  0001 C CNN
-	1    2850 3150
-	-1   0    0    -1  
-$EndComp
-Text GLabel 3050 3050 2    39   Input ~ 0
+Text GLabel 1500 2350 2    39   Input ~ 0
 I2S_DIN
-Text GLabel 3050 3250 2    39   Input ~ 0
+Text GLabel 1500 2550 2    39   Input ~ 0
 I2S_LRCK
-Text GLabel 3050 3350 2    39   Input ~ 0
+Text GLabel 1500 2650 2    39   Input ~ 0
 I2S_BCK
-Text GLabel 3050 3150 2    39   Input ~ 0
+Text GLabel 1500 2450 2    39   Input ~ 0
 I2S_SCK
 Wire Notes Line
-	2500 2700 3600 2700
+	950  2050 2050 2050
 Wire Notes Line
-	3600 2700 3600 3600
-Wire Notes Line
-	3600 3600 2500 3600
-Wire Notes Line
-	2500 2700 2500 3600
-Text Notes 3550 3700 2    39   ~ 0
+	2050 3050 950  3050
+Text Notes 2000 3150 2    39   ~ 0
 Output from USB -> I2S converter
+$Comp
+L Connector_Generic:Conn_01x06 J?
+U 1 1 5C680FBB
+P 1200 2550
+F 0 "J?" H 1120 2967 50  0000 C CNN
+F 1 "Conn_01x06" H 1120 2876 50  0000 C CNN
+F 2 "" H 1200 2550 50  0001 C CNN
+F 3 "~" H 1200 2550 50  0001 C CNN
+	1    1200 2550
+	-1   0    0    -1  
+$EndComp
+Wire Notes Line
+	2050 2050 2050 3050
+Wire Notes Line
+	950  2050 950  3050
+Wire Wire Line
+	1500 2350 1400 2350
+Wire Wire Line
+	1500 2450 1400 2450
+Wire Wire Line
+	1500 2550 1400 2550
+Wire Wire Line
+	1500 2650 1400 2650
+Wire Wire Line
+	1500 2750 1400 2750
+Wire Wire Line
+	1500 2850 1400 2850
+Text GLabel 1500 2750 2    39   BiDi ~ 0
+GND
+Text GLabel 1500 2850 2    39   Input ~ 0
+VUSB_IN
+$Comp
+L Regulator_Linear:LP5907MFX-1.8 U?
+U 1 1 5C6ADD71
+P 2000 3900
+F 0 "U?" H 2000 4267 50  0000 C CNN
+F 1 "LP5907MFX-1.8" H 2000 4176 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-5" H 2000 4250 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/lp5907.pdf" H 2000 4400 50  0001 C CNN
+	1    2000 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1650 3900 1700 3900
+Wire Wire Line
+	2000 4250 2000 4200
+$Comp
+L power:GND #PWR?
+U 1 1 5C6ADD7A
+P 2000 4250
+F 0 "#PWR?" H 2000 4000 50  0001 C CNN
+F 1 "GND" H 2005 4077 50  0000 C CNN
+F 2 "" H 2000 4250 50  0001 C CNN
+F 3 "" H 2000 4250 50  0001 C CNN
+	1    2000 4250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5C6ADD80
+P 1300 4000
+F 0 "C?" H 1392 4046 50  0000 L CNN
+F 1 "10uF" H 1392 3955 50  0000 L CNN
+F 2 "" H 1300 4000 50  0001 C CNN
+F 3 "~" H 1300 4000 50  0001 C CNN
+	1    1300 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5C6ADD87
+P 2450 3950
+F 0 "C?" H 2542 3996 50  0000 L CNN
+F 1 "10uF" H 2542 3905 50  0000 L CNN
+F 2 "" H 2450 3950 50  0001 C CNN
+F 3 "~" H 2450 3950 50  0001 C CNN
+	1    2450 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2450 3850 2450 3800
+Wire Wire Line
+	2300 3800 2450 3800
+Wire Wire Line
+	2000 4200 2450 4200
+Wire Wire Line
+	2450 4200 2450 4050
+Connection ~ 2000 4200
+Wire Wire Line
+	2000 4200 1300 4200
+Wire Wire Line
+	1300 4200 1300 4100
+Wire Wire Line
+	1300 3800 1300 3900
+Wire Wire Line
+	1300 3800 1650 3800
+Wire Wire Line
+	1650 3900 1650 3800
+Connection ~ 1650 3800
+Wire Wire Line
+	1650 3800 1700 3800
+Wire Wire Line
+	2500 3800 2450 3800
+Connection ~ 2450 3800
+Text GLabel 2500 3800 2    39   Output ~ 0
+AVDD
+Wire Wire Line
+	1250 3800 1300 3800
+Connection ~ 1300 3800
+Text GLabel 1250 3800 0    39   Input ~ 0
+VBUS_IN
+$Comp
+L Regulator_Linear:LP5907MFX-1.8 U?
+U 1 1 5C6B168E
+P 2000 4950
+F 0 "U?" H 2000 5317 50  0000 C CNN
+F 1 "LP5907MFX-1.8" H 2000 5226 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-5" H 2000 5300 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/lp5907.pdf" H 2000 5450 50  0001 C CNN
+	1    2000 4950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1650 4950 1700 4950
+Wire Wire Line
+	2000 5300 2000 5250
+$Comp
+L power:GND #PWR?
+U 1 1 5C6B1697
+P 2000 5300
+F 0 "#PWR?" H 2000 5050 50  0001 C CNN
+F 1 "GND" H 2005 5127 50  0000 C CNN
+F 2 "" H 2000 5300 50  0001 C CNN
+F 3 "" H 2000 5300 50  0001 C CNN
+	1    2000 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5C6B169D
+P 1300 5050
+F 0 "C?" H 1392 5096 50  0000 L CNN
+F 1 "10uF" H 1392 5005 50  0000 L CNN
+F 2 "" H 1300 5050 50  0001 C CNN
+F 3 "~" H 1300 5050 50  0001 C CNN
+	1    1300 5050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5C6B16A4
+P 2450 5000
+F 0 "C?" H 2542 5046 50  0000 L CNN
+F 1 "10uF" H 2542 4955 50  0000 L CNN
+F 2 "" H 2450 5000 50  0001 C CNN
+F 3 "~" H 2450 5000 50  0001 C CNN
+	1    2450 5000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2450 4900 2450 4850
+Wire Wire Line
+	2300 4850 2450 4850
+Wire Wire Line
+	2000 5250 2450 5250
+Wire Wire Line
+	2450 5250 2450 5100
+Connection ~ 2000 5250
+Wire Wire Line
+	2000 5250 1300 5250
+Wire Wire Line
+	1300 5250 1300 5150
+Wire Wire Line
+	1300 4850 1300 4950
+Wire Wire Line
+	1300 4850 1650 4850
+Wire Wire Line
+	1650 4950 1650 4850
+Connection ~ 1650 4850
+Wire Wire Line
+	1650 4850 1700 4850
+Wire Wire Line
+	2500 4850 2450 4850
+Connection ~ 2450 4850
+Text GLabel 2500 4850 2    39   Output ~ 0
+CPVDD
+Wire Wire Line
+	1250 4850 1300 4850
+Connection ~ 1300 4850
+Text GLabel 1250 4850 0    39   Input ~ 0
+VBUS_IN
+$Comp
+L Regulator_Linear:LP5907MFX-1.8 U?
+U 1 1 5C6B60FD
+P 2000 6000
+F 0 "U?" H 2000 6367 50  0000 C CNN
+F 1 "LP5907MFX-1.8" H 2000 6276 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-5" H 2000 6350 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/lp5907.pdf" H 2000 6500 50  0001 C CNN
+	1    2000 6000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1650 6000 1700 6000
+Wire Wire Line
+	2000 6350 2000 6300
+$Comp
+L power:GND #PWR?
+U 1 1 5C6B6106
+P 2000 6350
+F 0 "#PWR?" H 2000 6100 50  0001 C CNN
+F 1 "GND" H 2005 6177 50  0000 C CNN
+F 2 "" H 2000 6350 50  0001 C CNN
+F 3 "" H 2000 6350 50  0001 C CNN
+	1    2000 6350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5C6B610C
+P 1300 6100
+F 0 "C?" H 1392 6146 50  0000 L CNN
+F 1 "10uF" H 1392 6055 50  0000 L CNN
+F 2 "" H 1300 6100 50  0001 C CNN
+F 3 "~" H 1300 6100 50  0001 C CNN
+	1    1300 6100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5C6B6113
+P 2450 6050
+F 0 "C?" H 2542 6096 50  0000 L CNN
+F 1 "10uF" H 2542 6005 50  0000 L CNN
+F 2 "" H 2450 6050 50  0001 C CNN
+F 3 "~" H 2450 6050 50  0001 C CNN
+	1    2450 6050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2450 5950 2450 5900
+Wire Wire Line
+	2300 5900 2450 5900
+Wire Wire Line
+	2000 6300 2450 6300
+Wire Wire Line
+	2450 6300 2450 6150
+Connection ~ 2000 6300
+Wire Wire Line
+	2000 6300 1300 6300
+Wire Wire Line
+	1300 6300 1300 6200
+Wire Wire Line
+	1300 5900 1300 6000
+Wire Wire Line
+	1300 5900 1650 5900
+Wire Wire Line
+	1650 6000 1650 5900
+Connection ~ 1650 5900
+Wire Wire Line
+	1650 5900 1700 5900
+Wire Wire Line
+	2500 5900 2450 5900
+Connection ~ 2450 5900
+Text GLabel 2500 5900 2    39   Output ~ 0
+DVDD
+Wire Wire Line
+	1250 5900 1300 5900
+Connection ~ 1300 5900
+Text GLabel 1250 5900 0    39   Input ~ 0
+VBUS_IN
+$Comp
+L Device:Jumper_NO_Small JP?
+U 1 1 5C6C26F5
+P 3000 2200
+F 0 "JP?" H 3000 2385 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 3000 2294 50  0000 C CNN
+F 2 "" H 3000 2200 50  0001 C CNN
+F 3 "~" H 3000 2200 50  0001 C CNN
+	1    3000 2200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2850 2200 2900 2200
+Wire Wire Line
+	3150 2200 3100 2200
+Text GLabel 3150 2200 2    39   Input ~ 0
+FLT
+Text GLabel 2850 2200 0    39   Input ~ 0
+DVDD
+$Comp
+L Device:Jumper_NO_Small JP?
+U 1 1 5C6CEE77
+P 3000 2500
+F 0 "JP?" H 3000 2685 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 3000 2594 50  0000 C CNN
+F 2 "" H 3000 2500 50  0001 C CNN
+F 3 "~" H 3000 2500 50  0001 C CNN
+	1    3000 2500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2850 2500 2900 2500
+Wire Wire Line
+	3150 2500 3100 2500
+Text GLabel 3150 2500 2    39   Input ~ 0
+DEMP
+Text GLabel 2850 2500 0    39   Input ~ 0
+DVDD
+$Comp
+L Device:Jumper_NO_Small JP?
+U 1 1 5C6D5128
+P 3000 2800
+F 0 "JP?" H 3000 2985 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 3000 2894 50  0000 C CNN
+F 2 "" H 3000 2800 50  0001 C CNN
+F 3 "~" H 3000 2800 50  0001 C CNN
+	1    3000 2800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2850 2800 2900 2800
+Wire Wire Line
+	3150 2800 3100 2800
+Text GLabel 3150 2800 2    39   Input ~ 0
+FMT
+Text GLabel 2850 2800 0    39   Input ~ 0
+DVDD
+$Comp
+L Connector:Conn_01x04_Female J?
+U 1 1 5C6E1DA1
+P 4950 2000
+F 0 "J?" H 4977 1976 50  0000 L CNN
+F 1 "Conn_01x04_Female" H 4977 1885 50  0000 L CNN
+F 2 "" H 4950 2000 50  0001 C CNN
+F 3 "~" H 4950 2000 50  0001 C CNN
+	1    4950 2000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4700 1900 4750 1900
+Text GLabel 4700 1900 0    39   Input ~ 0
+XSMT
+Wire Notes Line
+	850  3350 850  6700
+Wire Notes Line
+	850  6700 2950 6700
+Wire Notes Line
+	2950 6700 2950 3350
+Wire Notes Line
+	2950 3350 850  3350
+Text Notes 850  6900 0    39   ~ 0
+Create the various +3V3 power rails for the DAC. I am choosing\nto create them entirely separately to try to ensure that each of\nthem is as isolated as possible from the others.
+$Comp
+L Connector:Conn_Coaxial J?
+U 1 1 5C70C509
+P 9900 2750
+F 0 "J?" H 9999 2726 50  0000 L CNN
+F 1 "Conn_Coaxial" H 9999 2635 50  0000 L CNN
+F 2 "" H 9900 2750 50  0001 C CNN
+F 3 " ~" H 9900 2750 50  0001 C CNN
+	1    9900 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_Coaxial J?
+U 1 1 5C70C573
+P 9900 3400
+F 0 "J?" H 9999 3376 50  0000 L CNN
+F 1 "Conn_Coaxial" H 9999 3285 50  0000 L CNN
+F 2 "" H 9900 3400 50  0001 C CNN
+F 3 " ~" H 9900 3400 50  0001 C CNN
+	1    9900 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9900 3650 9900 3600
+Wire Wire Line
+	9900 3000 9900 2950
+$Comp
+L power:GND #PWR?
+U 1 1 5C71FE21
+P 9900 3000
+F 0 "#PWR?" H 9900 2750 50  0001 C CNN
+F 1 "GND" H 9905 2827 50  0000 C CNN
+F 2 "" H 9900 3000 50  0001 C CNN
+F 3 "" H 9900 3000 50  0001 C CNN
+	1    9900 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5C7266C8
+P 9900 3650
+F 0 "#PWR?" H 9900 3400 50  0001 C CNN
+F 1 "GND" H 9905 3477 50  0000 C CNN
+F 2 "" H 9900 3650 50  0001 C CNN
+F 3 "" H 9900 3650 50  0001 C CNN
+	1    9900 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9650 2750 9700 2750
+Wire Wire Line
+	9650 3400 9700 3400
+Text GLabel 9650 3400 0    39   Output ~ 0
+LINE_OUT_R
+Text GLabel 9650 2750 0    39   Output ~ 0
+LINE_OUT_L
 $EndSCHEMATC
