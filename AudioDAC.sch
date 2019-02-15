@@ -1,9 +1,10 @@
 EESchema Schematic File Version 4
+LIBS:AudioDAC-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 3
+Sheet 1 4
 Title "DAC"
 Date ""
 Rev ""
@@ -24,5 +25,11 @@ S 1550 2750 1300 800
 U 5C68F334
 F0 "IO" 43
 F1 "IO.sch" 43
+$EndSheet
+$Sheet
+S 1550 3750 1300 700 
+U 5C649BC0
+F0 "USB To I2S" 50
+F1 "UsbToI2s.sch" 50
 $EndSheet
 $EndSCHEMATC
