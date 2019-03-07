@@ -1,0 +1,433 @@
+EESchema Schematic File Version 4
+LIBS:USB2I2S-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 "USB --> I2S"
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L CP2615-A01-GM:CP2615-A01-GM U6
+U 1 1 5C64AD2A
+P 6300 4100
+F 0 "U6" H 6300 5467 50  0000 C CNN
+F 1 "CP2615-A01-GM" H 6300 5376 50  0000 C CNN
+F 2 "CP2615-A01-GM:QFN50P500X500X90-33N" H 6300 4100 50  0001 L BNN
+F 3 "Unavailable" H 6300 4100 50  0001 L BNN
+F 4 "None" H 6300 4100 50  0001 L BNN "Field4"
+F 5 "QFN-32 Silicon Labs" H 6300 4100 50  0001 L BNN "Field5"
+F 6 "CP2615-A01-GM" H 6300 4100 50  0001 L BNN "Field6"
+F 7 "Usb To I2s Digital Audio Bridge Controller" H 6300 4100 50  0001 L BNN "Field7"
+F 8 "Silicon Labs" H 6300 4100 50  0001 L BNN "Field8"
+	1    6300 4100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7300 3000 7400 3000
+Wire Wire Line
+	7400 3000 7400 2800
+Wire Wire Line
+	7300 5200 7400 5200
+Wire Wire Line
+	7400 5200 7400 5300
+$Comp
+L power:GND #PWR0116
+U 1 1 5C64AE77
+P 7400 5300
+F 0 "#PWR0116" H 7400 5050 50  0001 C CNN
+F 1 "GND" H 7405 5127 50  0000 C CNN
+F 2 "" H 7400 5300 50  0001 C CNN
+F 3 "" H 7400 5300 50  0001 C CNN
+	1    7400 5300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7500 3600 7300 3600
+Wire Wire Line
+	7500 3700 7300 3700
+Wire Wire Line
+	7500 3800 7300 3800
+Wire Wire Line
+	7500 3900 7300 3900
+Wire Wire Line
+	5200 3300 5300 3300
+Wire Wire Line
+	5200 3400 5300 3400
+Wire Wire Line
+	5200 3600 5300 3600
+Wire Wire Line
+	5200 3900 5300 3900
+Wire Wire Line
+	5200 4000 5300 4000
+Wire Wire Line
+	7300 3100 7400 3100
+Wire Wire Line
+	7400 3100 7400 3000
+Connection ~ 7400 3000
+$Comp
+L power:GND #PWR0117
+U 1 1 5C650FD4
+P 7950 3150
+F 0 "#PWR0117" H 7950 2900 50  0001 C CNN
+F 1 "GND" H 7955 2977 50  0000 C CNN
+F 2 "" H 7950 3150 50  0001 C CNN
+F 3 "" H 7950 3150 50  0001 C CNN
+	1    7950 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C21
+U 1 1 5C65100D
+P 7750 2950
+F 0 "C21" H 7842 2996 50  0000 L CNN
+F 1 "1uF" H 7842 2905 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 7750 2950 50  0001 C CNN
+F 3 "~" H 7750 2950 50  0001 C CNN
+	1    7750 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C22
+U 1 1 5C651053
+P 8100 2950
+F 0 "C22" H 8192 2996 50  0000 L CNN
+F 1 "0.1uF" H 8192 2905 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 8100 2950 50  0001 C CNN
+F 3 "~" H 8100 2950 50  0001 C CNN
+	1    8100 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7750 3100 7750 3050
+Wire Wire Line
+	7750 3100 7950 3100
+Wire Wire Line
+	8100 3100 8100 3050
+Wire Wire Line
+	7950 3100 7950 3150
+Connection ~ 7950 3100
+Wire Wire Line
+	7950 3100 8100 3100
+Wire Wire Line
+	8100 2800 8100 2850
+Wire Wire Line
+	7750 2850 7750 2800
+Wire Wire Line
+	7750 2800 8100 2800
+$Comp
+L Device:R_US R10
+U 1 1 5C653F04
+P 5100 2800
+F 0 "R10" H 5168 2846 50  0000 L CNN
+F 1 "4.7K" H 5168 2755 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5140 2790 50  0001 C CNN
+F 3 "~" H 5100 2800 50  0001 C CNN
+	1    5100 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_US R9
+U 1 1 5C653F36
+P 4650 2800
+F 0 "R9" H 4718 2846 50  0000 L CNN
+F 1 "4.7K" H 4718 2755 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4690 2790 50  0001 C CNN
+F 3 "~" H 4650 2800 50  0001 C CNN
+	1    4650 2800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5100 2950 5100 3000
+Wire Wire Line
+	5100 3000 5300 3000
+Wire Wire Line
+	5100 2600 5100 2650
+Wire Wire Line
+	4650 2600 4650 2650
+Wire Wire Line
+	4650 2950 4650 3100
+Wire Wire Line
+	4650 3100 5300 3100
+Text GLabel 5200 3900 0    39   BiDi ~ 0
+VBUS_DP
+Text GLabel 5200 4000 0    39   BiDi ~ 0
+VBUS_DN
+Text GLabel 5200 3800 0    39   BiDi ~ 0
+VBUS_IN
+$Comp
+L Power_Protection:SP0503BAHT D1
+U 1 1 5C65DB12
+P 2150 2000
+F 0 "D1" H 2355 2046 50  0000 L CNN
+F 1 "SP0503BAHT" H 2355 1955 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-143" H 2375 1950 50  0001 L CNN
+F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 2275 2125 50  0001 C CNN
+	1    2150 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0121
+U 1 1 5C65DBF0
+P 2150 2300
+F 0 "#PWR0121" H 2150 2050 50  0001 C CNN
+F 1 "GND" H 2155 2127 50  0000 C CNN
+F 2 "" H 2150 2300 50  0001 C CNN
+F 3 "" H 2150 2300 50  0001 C CNN
+	1    2150 2300
+	1    0    0    -1  
+$EndComp
+Text GLabel 2250 1150 1    39   BiDi ~ 0
+VBUS_IN
+Text GLabel 2150 1150 1    39   BiDi ~ 0
+VBUS_DP
+Text GLabel 2050 1150 1    39   BiDi ~ 0
+VBUS_DN
+Connection ~ 7400 2800
+Wire Wire Line
+	7400 2800 7400 2650
+Connection ~ 7750 2800
+Text GLabel 7500 3600 2    39   Output ~ 0
+I2S_SDOUT
+Text GLabel 7500 3700 2    39   Output ~ 0
+I2S_MCLK
+Text GLabel 7500 3800 2    39   Output ~ 0
+I2S_LRCLK
+Text GLabel 7500 3900 2    39   Output ~ 0
+I2S_SCLK
+Wire Wire Line
+	7400 2800 7750 2800
+$Comp
+L Connector:Conn_01x06_Male J9
+U 1 1 5C685CE0
+P 9650 3750
+F 0 "J9" H 9623 3773 50  0000 R CNN
+F 1 "Conn_01x06_Male" H 9623 3682 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 9650 3750 50  0001 C CNN
+F 3 "~" H 9650 3750 50  0001 C CNN
+	1    9650 3750
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	9400 3550 9450 3550
+Wire Wire Line
+	9400 3650 9450 3650
+Wire Wire Line
+	9400 3750 9450 3750
+Wire Wire Line
+	9400 3850 9450 3850
+Text GLabel 9400 3550 0    39   Output ~ 0
+I2S_MCLK
+Text GLabel 9400 3650 0    39   Output ~ 0
+I2S_LRCLK
+Text GLabel 9400 3750 0    39   Output ~ 0
+I2S_SDOUT
+Text GLabel 9400 3850 0    39   Output ~ 0
+I2S_SCLK
+$Comp
+L Connector:USB_B_Micro J8
+U 1 1 5C6A9B8D
+P 1150 1600
+F 0 "J8" H 1205 2067 50  0000 C CNN
+F 1 "USB_B_Micro" H 1205 1976 50  0000 C CNN
+F 2 "Connector_USB:USB_Micro-B_GCT_USB3076-30-A" H 1300 1550 50  0001 C CNN
+F 3 "~" H 1300 1550 50  0001 C CNN
+	1    1150 1600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 2200 2150 2250
+Wire Wire Line
+	1050 2000 1050 2250
+Wire Wire Line
+	1050 2250 1150 2250
+Connection ~ 2150 2250
+Wire Wire Line
+	2150 2250 2150 2300
+Wire Wire Line
+	1150 2000 1150 2250
+Connection ~ 1150 2250
+Wire Wire Line
+	1150 2250 2150 2250
+Wire Wire Line
+	2250 1150 2250 1400
+Wire Wire Line
+	2150 1150 2150 1600
+Wire Wire Line
+	2050 1150 2050 1700
+Wire Wire Line
+	1450 1700 2050 1700
+Connection ~ 2050 1700
+Wire Wire Line
+	2050 1700 2050 1800
+Wire Wire Line
+	1450 1600 2150 1600
+Connection ~ 2150 1600
+Wire Wire Line
+	2150 1600 2150 1800
+Wire Wire Line
+	1450 1400 2250 1400
+Connection ~ 2250 1400
+Wire Wire Line
+	2250 1400 2250 1800
+Wire Wire Line
+	8800 3950 9450 3950
+Text GLabel 9400 4050 0    39   Output ~ 0
+VBUS_IN
+Text Notes 9050 4400 0    39   ~ 0
+NOTE:\nThe I2S signals are at logic level +3V3. The 5V\noutput is simply a way to pass through USB power\nfor later stages.
+$Comp
+L Connector:Conn_01x08_Male J1
+U 1 1 5C8086AE
+P 4950 4500
+F 0 "J1" H 5056 4978 50  0000 C CNN
+F 1 "Conn_01x08_Male" H 5056 4887 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 4950 4500 50  0001 C CNN
+F 3 "~" H 4950 4500 50  0001 C CNN
+	1    4950 4500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5150 4200 5300 4200
+Wire Wire Line
+	5150 4300 5300 4300
+Wire Wire Line
+	5150 4400 5300 4400
+Wire Wire Line
+	5150 4500 5300 4500
+Wire Wire Line
+	5150 4600 5300 4600
+Wire Wire Line
+	5150 4700 5300 4700
+Wire Wire Line
+	5150 4800 5300 4800
+Wire Wire Line
+	5150 4900 5300 4900
+Wire Wire Line
+	7300 4600 7450 4600
+$Comp
+L power:GND #PWR0102
+U 1 1 5C85B9BC
+P 8800 3950
+F 0 "#PWR0102" H 8800 3700 50  0001 C CNN
+F 1 "GND" H 8805 3777 50  0000 C CNN
+F 2 "" H 8800 3950 50  0001 C CNN
+F 3 "" H 8800 3950 50  0001 C CNN
+	1    8800 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J3
+U 1 1 5C85FA19
+P 5000 3300
+F 0 "J3" H 5106 3478 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 5106 3387 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 5000 3300 50  0001 C CNN
+F 3 "~" H 5000 3300 50  0001 C CNN
+	1    5000 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J5
+U 1 1 5C86976B
+P 5000 3600
+F 0 "J5" H 5106 3778 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 5106 3687 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 5000 3600 50  0001 C CNN
+F 3 "~" H 5000 3600 50  0001 C CNN
+	1    5000 3600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5200 3800 5300 3800
+$Comp
+L power:VCC #PWR0101
+U 1 1 5C7FA31D
+P 4650 2600
+F 0 "#PWR0101" H 4650 2450 50  0001 C CNN
+F 1 "VCC" H 4667 2773 50  0000 C CNN
+F 2 "" H 4650 2600 50  0001 C CNN
+F 3 "" H 4650 2600 50  0001 C CNN
+	1    4650 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0103
+U 1 1 5C7FBD92
+P 5100 2600
+F 0 "#PWR0103" H 5100 2450 50  0001 C CNN
+F 1 "VCC" H 5117 2773 50  0000 C CNN
+F 2 "" H 5100 2600 50  0001 C CNN
+F 3 "" H 5100 2600 50  0001 C CNN
+	1    5100 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0104
+U 1 1 5C7FBDC8
+P 7400 2650
+F 0 "#PWR0104" H 7400 2500 50  0001 C CNN
+F 1 "VCC" H 7417 2823 50  0000 C CNN
+F 2 "" H 7400 2650 50  0001 C CNN
+F 3 "" H 7400 2650 50  0001 C CNN
+	1    7400 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0105
+U 1 1 5C7FC116
+P 2400 1350
+F 0 "#PWR0105" H 2400 1200 50  0001 C CNN
+F 1 "VCC" H 2417 1523 50  0000 C CNN
+F 2 "" H 2400 1350 50  0001 C CNN
+F 3 "" H 2400 1350 50  0001 C CNN
+	1    2400 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 1400 2400 1400
+Wire Wire Line
+	2400 1400 2400 1350
+$Comp
+L Connector:Conn_01x04_Male J2
+U 1 1 5C80148E
+P 7800 4400
+F 0 "J2" H 7773 4280 50  0000 R CNN
+F 1 "Conn_01x04_Male" H 7773 4371 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 7800 4400 50  0001 C CNN
+F 3 "~" H 7800 4400 50  0001 C CNN
+	1    7800 4400
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7300 4400 7600 4400
+Wire Wire Line
+	7600 4500 7450 4500
+Wire Wire Line
+	7450 4500 7450 4600
+Wire Wire Line
+	7600 4300 7450 4300
+Wire Wire Line
+	7450 4300 7450 4200
+Wire Wire Line
+	7450 4200 7300 4200
+Wire Wire Line
+	7300 4300 7350 4300
+Wire Wire Line
+	7350 4300 7350 4150
+Wire Wire Line
+	7350 4150 7550 4150
+Wire Wire Line
+	7550 4150 7550 4200
+Wire Wire Line
+	7550 4200 7600 4200
+Wire Wire Line
+	9400 4050 9450 4050
+$EndSCHEMATC
