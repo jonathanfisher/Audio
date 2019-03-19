@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 5
+Sheet 1 6
 Title ""
 Date ""
 Rev ""
@@ -37,5 +37,11 @@ S 3550 2350 600  450
 U 5C923633
 F0 "DigitalToAnalog" 39
 F1 "DigitalToAnalog.sch" 39
+$EndSheet
+$Sheet
+S 3550 3700 600  400 
+U 5C9DE237
+F0 "Amplifier" 50
+F1 "Amplifier.sch" 50
 $EndSheet
 $EndSCHEMATC
