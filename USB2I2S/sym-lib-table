@@ -1,3 +1,4 @@
 (sym_lib_table
-  (lib (name CP2615-A01-GM)(type Legacy)(uri ${KIPRJMOD}../Libraries/CP2615-A01-GM.lib)(options "")(descr ""))
+  (lib (name CP2615-A01-GM)(type Legacy)(uri ${KIPRJMOD}/../Libraries/CP2615-A01-GM.lib)(options "")(descr ""))
+  (lib (name USB2I2S-rescue)(type Legacy)(uri ${KIPRJMOD}/USB2I2S-rescue.lib)(options "")(descr ""))
 )

@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 6 6
+Sheet 6 7
 Title ""
 Date ""
 Rev ""
@@ -1925,4 +1925,6 @@ $EndComp
 Wire Wire Line
 	11200 1650 11200 1600
 Connection ~ 10700 1600
+Text Notes 4050 9050 0    197  ~ 0
+This amplifier is intended for speakers, not headphones.
 $EndSCHEMATC

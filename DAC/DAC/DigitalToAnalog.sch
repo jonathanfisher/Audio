@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 5 6
+Sheet 5 7
 Title ""
 Date ""
 Rev ""
@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L JFisher:PCM5242RHB U?
+L DAC-rescue:PCM5242RHB-JFisher U?
 U 1 1 5C929B06
 P 5600 3750
 F 0 "U?" H 5600 5383 39  0000 C CNN

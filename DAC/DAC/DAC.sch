@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 6
+Sheet 1 7
 Title ""
 Date ""
 Rev ""
@@ -43,5 +43,11 @@ S 3550 3700 600  400
 U 5C9DE237
 F0 "Amplifier" 50
 F1 "Amplifier.sch" 50
+$EndSheet
+$Sheet
+S 3550 4250 600  400 
+U 5C9371A5
+F0 "HeadphoneAmp" 50
+F1 "HeadphoneAmp.sch" 50
 $EndSheet
 $EndSCHEMATC
