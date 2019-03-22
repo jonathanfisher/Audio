@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name JFisher)(type Legacy)(uri ${KIPRJMOD}/../Libraries/JFisher.lib)(options "")(descr ""))
+)
