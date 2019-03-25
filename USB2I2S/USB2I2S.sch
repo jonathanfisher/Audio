@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:USB2I2S-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -57,12 +56,6 @@ Wire Wire Line
 	7500 3800 7300 3800
 Wire Wire Line
 	7500 3900 7300 3900
-Wire Wire Line
-	5200 3300 5300 3300
-Wire Wire Line
-	5200 3400 5300 3400
-Wire Wire Line
-	5200 3600 5300 3600
 Wire Wire Line
 	5200 3900 5300 3900
 Wire Wire Line
@@ -157,9 +150,9 @@ Wire Wire Line
 Wire Wire Line
 	4650 3100 5300 3100
 Text GLabel 5200 3900 0    39   BiDi ~ 0
-VBUS_DP
+USB_DP
 Text GLabel 5200 4000 0    39   BiDi ~ 0
-VBUS_DN
+USB_DN
 Text GLabel 5200 3800 0    39   BiDi ~ 0
 VBUS_IN
 $Comp
@@ -187,9 +180,9 @@ $EndComp
 Text GLabel 2250 1150 1    39   BiDi ~ 0
 VBUS_IN
 Text GLabel 2150 1150 1    39   BiDi ~ 0
-VBUS_DP
+USB_DP
 Text GLabel 2050 1150 1    39   BiDi ~ 0
-VBUS_DN
+USB_DN
 Connection ~ 7400 2800
 Wire Wire Line
 	7400 2800 7400 2650
@@ -284,35 +277,6 @@ VBUS_IN
 Text Notes 9050 4400 0    39   ~ 0
 NOTE:\nThe I2S signals are at logic level +3V3. The 5V\noutput is simply a way to pass through USB power\nfor later stages.
 $Comp
-L Connector:Conn_01x08_Male J1
-U 1 1 5C8086AE
-P 4950 4500
-F 0 "J1" H 5056 4978 50  0000 C CNN
-F 1 "Conn_01x08_Male" H 5056 4887 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 4950 4500 50  0001 C CNN
-F 3 "~" H 4950 4500 50  0001 C CNN
-	1    4950 4500
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5150 4200 5300 4200
-Wire Wire Line
-	5150 4300 5300 4300
-Wire Wire Line
-	5150 4400 5300 4400
-Wire Wire Line
-	5150 4500 5300 4500
-Wire Wire Line
-	5150 4600 5300 4600
-Wire Wire Line
-	5150 4700 5300 4700
-Wire Wire Line
-	5150 4800 5300 4800
-Wire Wire Line
-	5150 4900 5300 4900
-Wire Wire Line
-	7300 4600 7450 4600
-$Comp
 L power:GND #PWR0102
 U 1 1 5C85B9BC
 P 8800 3950
@@ -321,28 +285,6 @@ F 1 "GND" H 8805 3777 50  0000 C CNN
 F 2 "" H 8800 3950 50  0001 C CNN
 F 3 "" H 8800 3950 50  0001 C CNN
 	1    8800 3950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:Conn_01x02_Male J3
-U 1 1 5C85FA19
-P 5000 3300
-F 0 "J3" H 5106 3478 50  0000 C CNN
-F 1 "Conn_01x02_Male" H 5106 3387 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 5000 3300 50  0001 C CNN
-F 3 "~" H 5000 3300 50  0001 C CNN
-	1    5000 3300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:Conn_01x01_Male J5
-U 1 1 5C86976B
-P 5000 3600
-F 0 "J5" H 5106 3778 50  0000 C CNN
-F 1 "Conn_01x01_Male" H 5106 3687 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 5000 3600 50  0001 C CNN
-F 3 "~" H 5000 3600 50  0001 C CNN
-	1    5000 3600
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -380,54 +322,25 @@ F 3 "" H 7400 2650 50  0001 C CNN
 	1    7400 2650
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:VCC #PWR0105
-U 1 1 5C7FC116
-P 2400 1350
-F 0 "#PWR0105" H 2400 1200 50  0001 C CNN
-F 1 "VCC" H 2417 1523 50  0000 C CNN
-F 2 "" H 2400 1350 50  0001 C CNN
-F 3 "" H 2400 1350 50  0001 C CNN
-	1    2400 1350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2250 1400 2400 1400
-Wire Wire Line
-	2400 1400 2400 1350
-$Comp
-L Connector:Conn_01x04_Male J2
-U 1 1 5C80148E
-P 7800 4400
-F 0 "J2" H 7773 4280 50  0000 R CNN
-F 1 "Conn_01x04_Male" H 7773 4371 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 7800 4400 50  0001 C CNN
-F 3 "~" H 7800 4400 50  0001 C CNN
-	1    7800 4400
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	7300 4400 7600 4400
-Wire Wire Line
-	7600 4500 7450 4500
-Wire Wire Line
-	7450 4500 7450 4600
-Wire Wire Line
-	7600 4300 7450 4300
-Wire Wire Line
-	7450 4300 7450 4200
-Wire Wire Line
-	7450 4200 7300 4200
-Wire Wire Line
-	7300 4300 7350 4300
-Wire Wire Line
-	7350 4300 7350 4150
-Wire Wire Line
-	7350 4150 7550 4150
-Wire Wire Line
-	7550 4150 7550 4200
-Wire Wire Line
-	7550 4200 7600 4200
 Wire Wire Line
 	9400 4050 9450 4050
+NoConn ~ 5300 3600
+NoConn ~ 5300 3300
+NoConn ~ 5300 3400
+NoConn ~ 7300 4900
+NoConn ~ 7300 4800
+NoConn ~ 7300 4700
+NoConn ~ 7300 4600
+NoConn ~ 7300 4500
+NoConn ~ 7300 4400
+NoConn ~ 7300 4300
+NoConn ~ 7300 4200
+NoConn ~ 5300 4200
+NoConn ~ 5300 4300
+NoConn ~ 5300 4400
+NoConn ~ 5300 4500
+NoConn ~ 5300 4600
+NoConn ~ 5300 4700
+NoConn ~ 5300 4800
+NoConn ~ 5300 4900
 $EndSCHEMATC
