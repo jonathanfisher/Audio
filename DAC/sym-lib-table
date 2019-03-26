@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name LT1028CN8)(type Legacy)(uri ${KIPRJMOD}/../Libraries/LT1028CN8.lib)(options "")(descr ""))
+  (lib (name JFisher)(type Legacy)(uri ${KIPRJMOD}/../Libraries/JFisher.lib)(options "")(descr ""))
+)
