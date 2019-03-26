@@ -715,4 +715,12 @@ NoConn ~ 6300 3400
 NoConn ~ 6300 3500
 Wire Wire Line
 	2600 1900 3000 1900
+Text GLabel 8000 2000 0    50   Input ~ 0
+OUTL_P
+Text GLabel 8200 2350 1    50   Input ~ 0
+OUTL_N
+Text GLabel 8250 2750 1    50   Input ~ 0
+OUTR_N
+Text GLabel 8200 3100 0    50   Input ~ 0
+OUTR_P
 $EndSCHEMATC
