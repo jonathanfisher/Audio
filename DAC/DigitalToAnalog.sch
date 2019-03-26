@@ -1,6 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:DAC-cache
-EELAYER 26 0
+EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L DAC-rescue:PCM5242RHB-JFisher U2
+L JFisher:PCM5242RHB U2
 U 1 1 5C929B06
 P 7100 3850
 F 0 "U2" H 7100 5483 39  0000 C CNN
@@ -396,8 +396,6 @@ F 3 "~" H 2600 2050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2600 1900 2750 1900
-Wire Wire Line
 	3000 1900 3000 1950
 Wire Wire Line
 	2600 1900 2600 1950
@@ -656,17 +654,6 @@ Text GLabel 9200 2750 2    39   Output ~ 0
 DACR-
 Text GLabel 9200 3200 2    39   Output ~ 0
 DACR+
-$Comp
-L Connector:Conn_01x02_Male J3
-U 1 1 5CA26092
-P 5450 3400
-F 0 "J3" H 5556 3578 50  0000 C CNN
-F 1 "Conn_01x02_Male-I2C" H 5556 3487 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 5450 3400 50  0001 C CNN
-F 3 "~" H 5450 3400 50  0001 C CNN
-	1    5450 3400
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	4850 3950 4850 4400
 Wire Wire Line
@@ -674,10 +661,6 @@ Wire Wire Line
 Wire Wire Line
 	4850 3700 6300 3700
 Connection ~ 4850 3950
-Wire Wire Line
-	5650 3400 6300 3400
-Wire Wire Line
-	5650 3500 6300 3500
 $Comp
 L Device:R_Small_US R6
 U 1 1 5CA63089
@@ -726,20 +709,10 @@ NoConn ~ 6300 3900
 NoConn ~ 6300 4000
 NoConn ~ 6300 4100
 NoConn ~ 6300 4200
-$Comp
-L power:PWR_FLAG #FLG0102
-U 1 1 5CA9137F
-P 2750 1900
-F 0 "#FLG0102" H 2750 1975 50  0001 C CNN
-F 1 "PWR_FLAG" H 2750 2074 50  0000 C CNN
-F 2 "" H 2750 1900 50  0001 C CNN
-F 3 "~" H 2750 1900 50  0001 C CNN
-	1    2750 1900
-	1    0    0    -1  
-$EndComp
-Connection ~ 2750 1900
-Wire Wire Line
-	2750 1900 3000 1900
 Wire Wire Line
 	2100 1900 2600 1900
+NoConn ~ 6300 3400
+NoConn ~ 6300 3500
+Wire Wire Line
+	2600 1900 3000 1900
 $EndSCHEMATC
