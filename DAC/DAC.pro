@@ -1,4 +1,4 @@
-update=3/25/2019 9:06:57 PM
+update=3/27/2019 7:38:50 PM
 version=1
 last_client=kicad
 [general]
@@ -19,7 +19,7 @@ LastNetListRead=DAC.net
 CopperLayerCount=4
 BoardThickness=1.6
 AllowMicroVias=0
-AllowBlindVias=1
+AllowBlindVias=0
 RequireCourtyardDefinitions=0
 ProhibitOverlappingCourtyards=1
 MinTrackWidth=0.2
