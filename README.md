@@ -13,8 +13,12 @@ I intend to design these as discrete boards that can be chained together. This m
 ## USB
 This stage is intended to be the interface between a digital audio source (e.g. computer) and the rest of the audio system. USB seemed to be a reasonable medium to use for this.
 
+![USB2I2S PCB Preview](doc/USB2I2S-1.2.png)
+
 ## DAC
 This stage is responsible for receiving a stream of digital signals and converting it to an analog output that can be converted to sound by a speaker.
+
+![DAC PCB Preview](doc/DAC-1.2.png)
 
 ## Amplifier
 This stage is responsible for taking the output of the DAC and amplifying it so that the speaker(s) output the desired level of sound.
