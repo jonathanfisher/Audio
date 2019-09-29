@@ -2,3 +2,5 @@
 *.kicad_pcb-bak
 *-cache.lib
 Gerber
+*.sch-bak
+DAC/_autosave-DAC.kicad_pcb
