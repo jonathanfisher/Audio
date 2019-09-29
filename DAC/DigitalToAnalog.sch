@@ -400,7 +400,7 @@ Wire Wire Line
 	6150 3100 6300 3100
 Wire Wire Line
 	6150 3200 6300 3200
-Text GLabel 6150 2900 0    39   Input ~ 0
+Text GLabel 4650 2900 0    39   Input ~ 0
 I2S_MCLK
 Text GLabel 6150 3000 0    39   Input ~ 0
 I2S_SCLK
@@ -943,4 +943,27 @@ Wire Wire Line
 	2700 3750 1950 3750
 Wire Wire Line
 	2700 3150 2700 3300
+$Comp
+L Connector_Generic:Conn_01x02 J7
+U 1 1 5D913EC5
+P 4750 3200
+F 0 "J7" V 4750 3350 50  0000 R CNN
+F 1 "Conn_01x02" V 4850 3400 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 4750 3200 50  0001 C CNN
+F 3 "~" H 4750 3200 50  0001 C CNN
+	1    4750 3200
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	4750 3000 4750 2900
+Wire Wire Line
+	4750 2900 4650 2900
+Wire Wire Line
+	4850 3000 4850 2900
+Wire Wire Line
+	4850 2900 4950 2900
+Text GLabel 4950 2900 2    50   Input ~ 0
+I2S_SCK_SRC
+Text GLabel 6150 2900 0    50   Input ~ 0
+I2S_SCK_SRC
 $EndSCHEMATC
