@@ -18,7 +18,7 @@ This stage is intended to be the interface between a digital audio source (e.g. 
 ## DAC
 This stage is responsible for receiving a stream of digital signals and converting it to an analog output that can be converted to sound by a speaker.
 
-![DAC PCB Preview](doc/DAC-1.2.png)
+![DAC PCB Preview](doc/DAC-1.3.png)
 
 ## Amplifier
 This stage is responsible for taking the output of the DAC and amplifying it so that the speaker(s) output the desired level of sound.
