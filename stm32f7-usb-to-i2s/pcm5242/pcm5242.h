@@ -51,11 +51,13 @@ typedef enum
 
 pcm5242_handle_t PCM5242_Init(I2C_HandleTypeDef *hi2c, uint8_t address);
 
+bool PCM5242_Reset(pcm5242_handle_t pcm5242);
+
 bool PCM5242_SetI2SFormat(pcm5242_handle_t pcm5242, uint8_t bits_per_word, uint8_t offset_bck);
 
 bool PCM5242_SetGPIOOutputEnable(pcm5242_handle_t pcm5242, PCM5242_GPIO_t gpio);
 
-bool PCM5242_SetGPIOOutput(pcm5242_handle_t pcm5242, PCM5242_GPIO_t gpio, PCM5242_GpioFunction_t function);
+bool PCM5242_SetGPIOOutputFunction(pcm5242_handle_t pcm5242, PCM5242_GPIO_t gpio, PCM5242_GpioFunction_t function);
 
 bool PCM5242_SetGPIOOutputValue(pcm5242_handle_t pcm5242, PCM5242_GPIO_t gpio, bool high);
 

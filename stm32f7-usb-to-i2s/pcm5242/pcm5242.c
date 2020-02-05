@@ -104,6 +104,10 @@ typedef struct pcm5242_t
 #define PCM5242_FLEX_A				PCM5242_DEFINE_REGISTER(253, 63)
 #define PCM5242_FLEX_B				PCM5242_DEFINE_REGISTER(253, 64)
 
+/* Page 0, Register 1: Reset */
+#define PCM5242_RSTR (1 << 0)
+#define PCM5242_RSTM (1 << 4)
+
 /* Page 0, Register 37: Error detection flags */
 #define PCM5242_IPLK				(1 << 0) //! Ignore PLL Lock Detection
 #define PCM5242_DCAS				(1 << 1) //! Disable Clock Divider Autoset
@@ -242,7 +246,29 @@ pcm5242_handle_t PCM5242_Init(I2C_HandleTypeDef *hi2c, uint8_t address)
 		return NULL;
 	}
 
+	// Reset the chip putting it into a known state.
+	if (!PCM5242_Reset(pcm5242))
+	{
+		free(pcm5242);
+		return NULL;
+	}
+
 	return pcm5242;
+}
+
+bool PCM5242_Reset(pcm5242_handle_t pcm5242)
+{
+	assert(pcm5242 != NULL);
+	if (pcm5242 == NULL)
+		return false;
+
+	if (!PCM5242_WriteRegister(pcm5242, PCM5242_RESET, PCM5242_RSTR | PCM5242_RSTM))
+		return false;
+
+	if (!PCM5242_WriteRegister(pcm5242, PCM5242_RESET, 0))
+		return false;
+
+	return true;
 }
 
 
@@ -315,7 +341,7 @@ bool PCM5242_SetGPIOOutputEnable(pcm5242_handle_t pcm5242, PCM5242_GPIO_t gpio)
 	return PCM5242_WriteRegister(pcm5242, PCM5242_GPIO_EN, gpio_mask);
 }
 
-bool PCM5242_SetGPIOOutput(pcm5242_handle_t pcm5242, PCM5242_GPIO_t gpio, PCM5242_GpioFunction_t function)
+bool PCM5242_SetGPIOOutputFunction(pcm5242_handle_t pcm5242, PCM5242_GPIO_t gpio, PCM5242_GpioFunction_t function)
 {
 	assert(pcm5242 != NULL);
 	if (pcm5242 == NULL)
