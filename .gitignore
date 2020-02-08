@@ -5,3 +5,7 @@ Gerber
 *.sch-bak
 DAC/_autosave-DAC.kicad_pcb
 stm32f7-usb-to-i2s/Debug
+stm32f7-usb-to-i2s/.idea
+stm32f7-usb-to-i2s/.settings
+stm32f7-usb-to-i2s/.settings
+stm32f7-usb-to-i2s/cmake-build-debug
