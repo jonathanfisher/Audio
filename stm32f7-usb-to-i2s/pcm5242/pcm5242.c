@@ -138,6 +138,10 @@ typedef uint16_t PCM5242Register;
 #define PCM5242_RSTR (1 << 0)
 #define PCM5242_RSTM (1 << 4)
 
+/* Page 0, Register 2: Power */
+#define PCM5242_RQPD    (1 << 0) //! Request power down (power down the DAC)
+#define PCM5242_RQST    (1 << 4) //! Request standby (power down all but charge pump & digital power supply)
+
 /* Page 0, Register 37: Error detection flags */
 #define PCM5242_IPLK                (1 << 0) //! Ignore PLL Lock Detection
 #define PCM5242_DCAS                (1 << 1) //! Disable Clock Divider Autoset
@@ -381,6 +385,15 @@ pcm5242_handle_t PCM5242_Init(I2C_HandleTypeDef *hi2c, uint8_t address)
     return pcm5242;
 }
 
+void PCM5242_Free(pcm5242_handle_t pcm5242)
+{
+    assert(pcm5242 != NULL);
+    if (pcm5242 == NULL)
+        return;
+
+    free(pcm5242);
+}
+
 bool PCM5242_Reset(pcm5242_handle_t pcm5242)
 {
     assert(pcm5242 != NULL);
@@ -391,6 +404,59 @@ bool PCM5242_Reset(pcm5242_handle_t pcm5242)
         return false;
 
     if (!PCM5242_WriteRegister(pcm5242, PCM5242_RESET, 0))
+        return false;
+
+    return true;
+}
+
+bool PCM5242_Standby(pcm5242_handle_t pcm5242)
+{
+    assert(pcm5242 != NULL);
+    if (pcm5242 == NULL)
+        return false;
+
+    uint8_t reg_val;
+    if (!PCM5242_ReadRegister(pcm5242, PCM5242_POWER, &reg_val))
+        return false;
+
+    reg_val |= PCM5242_RQST;
+
+    if (!PCM5242_WriteRegister(pcm5242, PCM5242_POWER, reg_val))
+        return false;
+
+    return true;
+}
+
+bool PCM5242_PowerOff(pcm5242_handle_t pcm5242)
+{
+    assert(pcm5242 != NULL);
+    if (pcm5242 == NULL)
+        return false;
+
+    uint8_t reg_val;
+    if (!PCM5242_ReadRegister(pcm5242, PCM5242_POWER, &reg_val))
+        return false;
+
+    reg_val |= PCM5242_RQPD;
+
+    if (!PCM5242_WriteRegister(pcm5242, PCM5242_POWER, reg_val))
+        return false;
+
+    return true;
+}
+
+/**
+ * @brief Set the PCM5242 power state to "on"
+ * @param pcm5242 Handle of an initialized PCM5242
+ * @return true if successful, otherwise false
+ */
+bool PCM5242_Activate(pcm5242_handle_t pcm5242)
+{
+    assert(pcm5242 != NULL);
+    if (pcm5242 == NULL)
+        return false;
+
+    if (!PCM5242_WriteRegister(pcm5242, PCM5242_POWER, 0))
         return false;
 
     return true;

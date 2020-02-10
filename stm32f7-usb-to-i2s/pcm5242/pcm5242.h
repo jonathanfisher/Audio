@@ -59,11 +59,38 @@ typedef enum
 pcm5242_handle_t PCM5242_Init(I2C_HandleTypeDef *hi2c, uint8_t address);
 
 /**
+ * @brief Clean up the PCM5242 chip handle and release memory
+ * @param pcm5242 A handle to an initialized PCM5242
+ */
+void PCM5242_Free(pcm5242_handle_t pcm5242);
+
+/**
  * @brief Reset the PCM5242 device
  * @param pcm5242 Handle to the initialized PCM5242 device
  * @return True if successful, otherwise false
  */
 bool PCM5242_Reset(pcm5242_handle_t pcm5242);
+
+/**
+ * @brief Tell the chip to enter standby mode
+ * @param pcm5242 Handle to an initialized PCM5242
+ * @return true if successful, otherwise false
+ */
+bool PCM5242_Standby(pcm5242_handle_t pcm5242);
+
+/**
+ * @brief Request the PCM5242 to power down everything.
+ * @param pcm5242 Handle to an initialized PCM5242
+ * @return True if successful, otherwise false
+ */
+bool PCM5242_PowerOff(pcm5242_handle_t pcm5242);
+
+/**
+ * @brief Set the PCM5242 power state to "on"
+ * @param pcm5242 Handle of an initialized PCM5242
+ * @return true if successful, otherwise false
+ */
+bool PCM5242_Activate(pcm5242_handle_t pcm5242);
 
 /**
  * @brief Set the I2S format for the Audio subsystem of the DAC
