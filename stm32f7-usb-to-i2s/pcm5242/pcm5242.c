@@ -125,6 +125,7 @@ typedef uint16_t PCM5242Register;
 #define PCM5242_FLEX_A                  PCM5242_DEFINE_REGISTER(253, 63)
 #define PCM5242_FLEX_B                  PCM5242_DEFINE_REGISTER(253, 64)
 
+#undef PCM5242_DEFINE_REGISTER
 /**
  * @}
  */
