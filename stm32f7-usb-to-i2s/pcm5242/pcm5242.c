@@ -161,9 +161,27 @@ typedef uint16_t PCM5242Register;
 #define PCM5242_AFMT_RTJ            (2 << 4)
 #define PCM5242_AFMT_LTJ            (3 << 4)
 
+/* Page 0, Register 118: Chip status */
+#define PCM5242_BOTM                (1 << 7)
+#define PCM5242_PSTM_MASK           0x0f
+typedef enum
+{
+    PCM5242_PowerDown                       = 0,
+    PCM5242_WaitForCPVoltageValid           = 1,
+    PCM5242_Calibration                     = 2,
+    PCM5242_Calibration                     = 3,
+    PCM5242_VolumeRampUp                    = 4,
+    PCM5242_Run                             = 5,
+    PCM5242_LineOutputShort_LowImpedance    = 6,
+    PCM5242_VolumeRampDown                  = 7,
+    PCM5242_Standby                         = 8,
+    PCM5242_ChipStatus_Count
+} PCM5242_ChipStatus_t;
+
 /**
  * @}
  */
+
 static bool PCM5242_SetPage(pcm5242_handle_t pcm5242, uint8_t page);
 
 /**
@@ -275,6 +293,51 @@ static bool PCM5242_SetPage(pcm5242_handle_t pcm5242, uint8_t page)
 static bool PCM5242_WriteFlexRegisters(pcm5242_handle_t pcm5242)
 {
     return PCM5242_WriteRegister(pcm5242, PCM5242_FLEX_A, 0x11) && PCM5242_WriteRegister(pcm5242, PCM5242_FLEX_B, 0xff);
+}
+
+/**
+ * @brief Get the current internal state of the PCM5242
+ * @param pcm5242 Handle to initialized PCM5242
+ * @param state Pointer to enum variable in which to store the result state
+ * @param dsp_boot_complete Pointer to boolean to indicate whether the DSP has booted
+ * @return True if successful (output variables contain resultant state), otherwise false
+ */
+static bool PCM5242_GetChipState(pcm5242_handle_t pcm5242, PCM5242_ChipStatus_t *state, bool *dsp_boot_complete)
+{
+    uint8_t value;
+
+    assert(state != NULL);
+    if (state == NULL)
+        return false;
+
+    assert(dsp_boot_complete != NULL);
+    if (dsp_boot_complete == NULL)
+        return false;
+
+    if (!PCM5242_ReadRegister(pcm5242, PCM5242_STATE, &value))
+        return false;
+
+    switch (value & PCM5242_PSTM_MASK)
+    {
+        case PCM5242_PowerDown:
+        case PCM5242_WaitForCPVoltageValid:
+        case PCM5242_Calibration:
+        case PCM5242_Calibration:
+        case PCM5242_VolumeRampUp:
+        case PCM5242_Run:
+        case PCM5242_LineOutputShort_LowImpedance:
+        case PCM5242_VolumeRampDown:
+        case PCM5242_Standby:
+            break;
+
+        default:
+            return false;
+    }
+
+    *state = value & PCM5242_PSTM_MASK;
+    *dsp_boot_complete = value & PCM5242_BOTM;
+
+    return true;
 }
 
 /*****************************************************************************
