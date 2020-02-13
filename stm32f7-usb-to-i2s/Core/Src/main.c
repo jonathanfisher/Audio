@@ -68,8 +68,8 @@ static void MX_I2C1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-static bool
-calculate_wave_samples(int16_t *samplePtr, int16_t amplitude, int n_samples, float *angle, float angle_delta)
+static bool calculate_wave_samples(int16_t *samplePtr, int16_t amplitude,
+        int n_samples, float *angle, float angle_delta)
 {
     int i;
 
