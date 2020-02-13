@@ -125,7 +125,6 @@ typedef uint16_t PCM5242Register;
 #define PCM5242_FLEX_A                  PCM5242_DEFINE_REGISTER(253, 63)
 #define PCM5242_FLEX_B                  PCM5242_DEFINE_REGISTER(253, 64)
 
-#undef PCM5242_DEFINE_REGISTER
 /**
  * @}
  */
@@ -169,8 +168,8 @@ typedef enum
 {
     PCM5242_PowerDown                       = 0,
     PCM5242_WaitForCPVoltageValid           = 1,
-    PCM5242_Calibration                     = 2,
-    PCM5242_Calibration                     = 3,
+    PCM5242_Calibration_1                   = 2,
+    PCM5242_Calibration_2                   = 3,
     PCM5242_VolumeRampUp                    = 4,
     PCM5242_Run                             = 5,
     PCM5242_LineOutputShort_LowImpedance    = 6,
@@ -322,8 +321,8 @@ static bool PCM5242_GetChipState(pcm5242_handle_t pcm5242, PCM5242_ChipStatus_t 
     {
         case PCM5242_PowerDown:
         case PCM5242_WaitForCPVoltageValid:
-        case PCM5242_Calibration:
-        case PCM5242_Calibration:
+        case PCM5242_Calibration_1:
+        case PCM5242_Calibration_2:
         case PCM5242_VolumeRampUp:
         case PCM5242_Run:
         case PCM5242_LineOutputShort_LowImpedance:
