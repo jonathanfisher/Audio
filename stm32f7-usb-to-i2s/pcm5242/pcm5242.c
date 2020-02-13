@@ -182,6 +182,10 @@ typedef enum
  * @}
  */
 
+/*****************************************************************************
+ * Static functions, visible only within this file.
+ *****************************************************************************/
+
 static bool PCM5242_SetPage(pcm5242_handle_t pcm5242, uint8_t page);
 
 /**
