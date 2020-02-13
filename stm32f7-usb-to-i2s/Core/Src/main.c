@@ -25,6 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <assert.h>
+#include <math.h>
 
 #include "pcm5242.h"
 /* USER CODE END Includes */
@@ -67,7 +68,28 @@ static void MX_I2C1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+static bool
+calculate_wave_samples(int16_t *samplePtr, int16_t amplitude, int n_samples, float *angle, float angle_delta)
+{
+    int i;
 
+    assert(samplePtr != NULL);
+    if (samplePtr == NULL)
+        return false;
+
+    assert(angle != NULL);
+    if (angle == NULL)
+        return false;
+
+    for (i = 0; i < n_samples; i++, samplePtr++)
+    {
+        *samplePtr = amplitude * sin(*angle);
+
+        *angle = fmod(*angle + angle_delta, 2.0f * M_PI);
+    }
+
+    return true;
+}
 /* USER CODE END 0 */
 
 /**
