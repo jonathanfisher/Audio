@@ -51,7 +51,10 @@ I2C_HandleTypeDef hi2c1;
 UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
-
+const static float m_DesiredOutputFreq_Hz = 1000.0f;
+const static float m_DAC_SampleRate_Hz = 48000.0f;
+static float m_CurrentAngle_rad;
+static float m_AngleDelta_rad;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -129,6 +132,9 @@ int main(void) {
 
     pcm5242 = PCM5242_Init(&hi2c1, pcm5242_addr);
     assert(pcm5242 != NULL);
+
+    m_CurrentAngle_rad = 0.0f;
+    m_AngleDelta_rad = 2.0f * M_PI * m_DesiredOutputFreq_Hz / m_DAC_SampleRate_Hz;
     /* USER CODE END 2 */
 
 
