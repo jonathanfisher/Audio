@@ -170,15 +170,15 @@ typedef uint16_t PCM5242Register;
 #define PCM5242_PSTM_MASK           0x0f
 typedef enum
 {
-    PCM5242_PowerDown                       = 0,
-    PCM5242_WaitForCPVoltageValid           = 1,
-    PCM5242_Calibration_1                   = 2,
-    PCM5242_Calibration_2                   = 3,
-    PCM5242_VolumeRampUp                    = 4,
-    PCM5242_Run                             = 5,
-    PCM5242_LineOutputShort_LowImpedance    = 6,
-    PCM5242_VolumeRampDown                  = 7,
-    PCM5242_Standby                         = 8,
+    PCM5242_ChipStatus_PowerDown                       = 0,
+    PCM5242_ChipStatus_WaitForCPVoltageValid           = 1,
+    PCM5242_ChipStatus_Calibration_1                   = 2,
+    PCM5242_ChipStatus_Calibration_2                   = 3,
+    PCM5242_ChipStatus_VolumeRampUp                    = 4,
+    PCM5242_ChipStatus_Run                             = 5,
+    PCM5242_ChipStatus_LineOutputShort_LowImpedance    = 6,
+    PCM5242_ChipStatus_VolumeRampDown                  = 7,
+    PCM5242_ChipStatus_Standby                         = 8,
     PCM5242_ChipStatus_Count
 } PCM5242_ChipStatus_t;
 
@@ -327,15 +327,15 @@ static bool PCM5242_GetChipState(pcm5242_handle_t pcm5242, PCM5242_ChipStatus_t 
 
     switch (value & PCM5242_PSTM_MASK)
     {
-        case PCM5242_PowerDown:
-        case PCM5242_WaitForCPVoltageValid:
-        case PCM5242_Calibration_1:
-        case PCM5242_Calibration_2:
-        case PCM5242_VolumeRampUp:
-        case PCM5242_Run:
-        case PCM5242_LineOutputShort_LowImpedance:
-        case PCM5242_VolumeRampDown:
-        case PCM5242_Standby:
+        case PCM5242_ChipStatus_PowerDown:
+        case PCM5242_ChipStatus_WaitForCPVoltageValid:
+        case PCM5242_ChipStatus_Calibration_1:
+        case PCM5242_ChipStatus_Calibration_2:
+        case PCM5242_ChipStatus_VolumeRampUp:
+        case PCM5242_ChipStatus_Run:
+        case PCM5242_ChipStatus_LineOutputShort_LowImpedance:
+        case PCM5242_ChipStatus_VolumeRampDown:
+        case PCM5242_ChipStatus_Standby:
             break;
 
         default:

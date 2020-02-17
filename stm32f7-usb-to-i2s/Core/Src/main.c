@@ -55,10 +55,13 @@ DMA_HandleTypeDef hdma_spi3_tx;
 UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
-const static float m_DesiredOutputFreq_Hz = 1000.0f;
-const static float m_DAC_SampleRate_Hz = 48000.0f;
+static float m_DesiredOutputFreq_Hz = 1000.0f;
+static float m_DAC_SampleRate_Hz;
 static float m_CurrentAngle_rad;
 static float m_AngleDelta_rad;
+
+#define MAX_WAVE_LEN (64)
+static int16_t m_InputWave[MAX_WAVE_LEN];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -74,10 +77,11 @@ static void MX_I2S3_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-static bool calculate_wave_samples(int16_t *samplePtr, int16_t amplitude,
+static bool calculate_wave_samples(int16_t *samplePtr, int n_channels, int16_t amplitude,
         int n_samples, float *angle, float angle_delta)
 {
     int i;
+    int channel;
 
     assert(samplePtr != NULL);
     if (samplePtr == NULL)
@@ -87,11 +91,17 @@ static bool calculate_wave_samples(int16_t *samplePtr, int16_t amplitude,
     if (angle == NULL)
         return false;
 
-    for (i = 0; i < n_samples; i++, samplePtr++)
+    for (i = 0; i < n_samples; i += n_channels, samplePtr += n_channels)
     {
-        *samplePtr = amplitude * sin(*angle);
+        *samplePtr = amplitude * cosf(*angle);
+        for (channel = 1; channel < n_channels; channel++)
+        {
+        	samplePtr[channel] = *samplePtr;
+        }
 
-        *angle = fmod(*angle + angle_delta, 2.0f * M_PI);
+        *angle += angle_delta;
+        if (*angle > 2.0f * M_PI)
+        	*angle -= 2.0f * M_PI;
     }
 
     return true;
@@ -108,6 +118,12 @@ int main(void)
 
   /* USER CODE END 1 */
   
+
+  /* Enable I-Cache---------------------------------------------------------*/
+  SCB_EnableICache();
+
+  /* Enable D-Cache---------------------------------------------------------*/
+  SCB_EnableDCache();
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -126,8 +142,8 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
   MX_DMA_Init();
+  MX_GPIO_Init();
   MX_USART3_UART_Init();
   MX_USB_DEVICE_Init();
   MX_I2C1_Init();
@@ -138,9 +154,6 @@ int main(void)
 
     pcm5242 = PCM5242_Init(&hi2c1, pcm5242_addr);
     assert(pcm5242 != NULL);
-
-    m_CurrentAngle_rad = 0.0f;
-    m_AngleDelta_rad = 2.0f * M_PI * m_DesiredOutputFreq_Hz / m_DAC_SampleRate_Hz;
 
     bool result;
     const uint8_t bits_per_word = 16;
@@ -154,33 +167,16 @@ int main(void)
     }
 
     // Want: 1khz full scale sine wave.
-    // sample rate: 48khz
-    // period: 1ms
-    // need 48 samples
-#define INPUT_LEN 48
-    static int16_t input[2 * INPUT_LEN];
-    int i;
+    m_CurrentAngle_rad = 0.0f;
+    m_DAC_SampleRate_Hz = hi2s3.Init.AudioFreq;
+    m_AngleDelta_rad = 2.0f * M_PI * m_DesiredOutputFreq_Hz / m_DAC_SampleRate_Hz;
 
-    for (i = 0; i < 2 * INPUT_LEN; i+=2)
+    if (!calculate_wave_samples(m_InputWave, 2, INT16_MAX, MAX_WAVE_LEN, &m_CurrentAngle_rad, m_AngleDelta_rad))
     {
-        float val = 2.0 * M_PI * 1000.0 / 48000.0;
-        float t = (float)i / 2;
-        input[i] = SHRT_MAX * sin(val * t);
-//
-//    	if (i < INPUT_LEN)
-//    	{
-//    		input[i] = SHRT_MAX;
-//    	}
-//    	else
-//    	{
-//    		input[i] = SHRT_MIN;
-//    	}
-
-    	input[i+1] = input[i];
-//        input[i] = (SHRT_MIN) + (i * (SHRT_MAX - SHRT_MIN) / (INPUT_LEN - 1));
+    	while (1);
     }
 
-    HAL_I2S_Transmit_DMA(&hi2s3, input, 2*INPUT_LEN);
+    HAL_I2S_Transmit_DMA(&hi2s3, (uint16_t *)m_InputWave, MAX_WAVE_LEN);
 
   /* USER CODE END 2 */
  
@@ -323,7 +319,7 @@ static void MX_I2S3_Init(void)
   hi2s3.Init.Standard = I2S_STANDARD_PHILIPS;
   hi2s3.Init.DataFormat = I2S_DATAFORMAT_16B;
   hi2s3.Init.MCLKOutput = I2S_MCLKOUTPUT_ENABLE;
-  hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_48K;
+  hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_44K;
   hi2s3.Init.CPOL = I2S_CPOL_LOW;
   hi2s3.Init.ClockSource = I2S_CLOCK_PLL;
   if (HAL_I2S_Init(&hi2s3) != HAL_OK)
@@ -450,12 +446,26 @@ static void MX_GPIO_Init(void)
 void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 {
 	HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+
+	// The first half has been transferred, overwrite that.
+	if (!calculate_wave_samples(&m_InputWave[0], 2, INT16_MAX, MAX_WAVE_LEN / 2, &m_CurrentAngle_rad, m_AngleDelta_rad))
+    {
+	    while(1);
+    }
+
 //    HalfTransfer_CallBack_FS();
 }
 
 void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
 {
 	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+
+	// Calculate the second half of the wave
+//	HAL_I2S_DMAPause(hi2s);
+    if (!calculate_wave_samples(&m_InputWave[MAX_WAVE_LEN / 2], 2, INT16_MAX, MAX_WAVE_LEN / 2, &m_CurrentAngle_rad, m_AngleDelta_rad))
+    {
+        while(1);
+    }
 //    TransferComplete_CallBack_FS();
 }
 /* USER CODE END 4 */
