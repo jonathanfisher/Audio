@@ -1,5 +1,6 @@
 import os
 import csv
+import sys
 import numpy as np
 import pickle
 import scipy.fftpack
@@ -16,10 +17,17 @@ def load_data(csv_filename):
         time, samples = [], []
         with open(csv_filename, 'r') as f:
             reader = csv.DictReader(f)
+            print('Names: {}'.format(reader.fieldnames))
 
             for row in reader:
-                a, b, c = row
-                v = float(row[b]) - float(row[c])
+                v = 0
+                if len(reader.fieldnames) == 2:
+                    a, b = row
+                    v = float(row[b])
+                elif len(reader.fieldnames) == 3:
+                    a, b, c = row
+                    v = float(row[b]) - float(row[c])
+
                 time.append(float(row[a]))
                 samples.append(v)
 
@@ -64,6 +72,36 @@ def manual(time, samples):
     plt.show()
 
 
+def a_weight(f):
+    K_a = 1.258905
+    F1 = 20.60
+    F2 = 107.7
+    F3 = 737.9
+    F4 = 12194
+
+    f_1 = (f / F1)
+    f_2 = (f / F2)
+    f_3 = (f / F3)
+    f_4 = (f / F4)
+
+    A = (f_1 ** 2) / (1 + (f_1 ** 2))
+    B = f_2 / np.sqrt(1 + (f_2 ** 2))
+    C = f_3 / np.sqrt(1 + (f_3 ** 2))
+    D = 1 / (1 + (f_4 ** 2))
+
+    return K_a * A * B * C * D
+
+
+def apply_a_weighting(signal):
+    f = np.linspace(20, 20000)
+    s = a_weight(f)
+    plt.plot(f, 20 * np.log10(s))
+    plt.xscale('log')
+    plt.grid(True, which='both')
+    plt.show()
+    print('Max: {}'.format(max(s)))
+
+
 def analyze(time, samples, noise_time=None, noise_samples=None):
     sample_time = time[1] - time[0]
 
@@ -74,8 +112,8 @@ def analyze(time, samples, noise_time=None, noise_samples=None):
     if noise_samples is not None:
         modified_noise = windowingFunc * noise_samples
 
-    samples_fft = scipy.fftpack.fft(modified_samples) / len(modified_samples)
-    f = scipy.fftpack.fftfreq(len(time), d=sample_time)
+    samples_fft = scipy.fftpack.fft(modified_samples, n=2*len(modified_samples)) / len(modified_samples)
+    f = scipy.fftpack.fftfreq(len(samples_fft), d=sample_time)
 
     noise_fft, noise_f = None, None
     if modified_noise is not None:
@@ -88,30 +126,53 @@ def analyze(time, samples, noise_time=None, noise_samples=None):
         logNoise = 20 * np.log10(np.abs(noise_fft))
 
     m = max(logData)
-    avg = np.mean(logData)
-    std_dev = np.std(logData)
-    noise_floor = avg + (3 * std_dev)
-    print('stdDev: {}'.format(std_dev))
-    print('Max: {}dB'.format(m))
-    print('Noise Floor (median): {}'.format(avg))
-    print('SNR (approx): {} dB'.format(m - noise_floor))
+    print('Max: {:.02f} dB'.format(m))
 
     cutoff = len(f) // 2
 
+    # Get only the positive portion of the frequency and FFT
+    positive_freq_mask = np.ma.masked_outside(f, 20, 40000)
+    positive_freq = positive_freq_mask.compressed()
+    positive_samples = samples_fft[~positive_freq_mask.mask]
+
+    weighted_samples = a_weight(positive_freq) * positive_samples
+
+    plt.subplot(2, 1, 1)
+    plt.plot(positive_freq, 20 * np.log10(np.abs(weighted_samples)))
+    plt.xscale('log')
+    plt.xlim([20, 20000])
+    plt.grid(True, which='both')
+
+    # Mask out the fundamental frequency, keeping everything else
+    fundamental_mask = np.ma.masked_outside(positive_freq, 995, 1005)
+    rms_except_fundamental = np.sqrt(np.sum(np.abs(weighted_samples[~fundamental_mask.mask]) ** 2))
+    print('Masked RMS: {}'.format(rms_except_fundamental))
+
+    total_rms = np.sqrt(np.sum(np.abs(weighted_samples) ** 2))
+    print('Total RMS: {}'.format(total_rms))
+
+    thdn = rms_except_fundamental / total_rms
+    print('RMS percent: {}'.format(thdn * 100))
+    print('RMS [db]: {}'.format(20*np.log10(1 - thdn)))
+
+    plt.subplot(2, 1, 2)
+    plt.title('FFT of 1KHz FS Sine Wave')
+    plt.xlabel('Frequency (Hz)')
+    plt.ylabel('dBV')
+    plt.grid(b=True, which='both')
     plt.plot(f[:cutoff], logData[:cutoff], label='1KHz FS Sine Wave')
     if noise_fft is not None:
         plt.plot(noise_f[:cutoff], logNoise[:cutoff], color='gray', zorder=0, label='Noise')
 
     plt.xscale('log')
-    plt.hlines(avg, 0, 20000, colors='r', linestyles=':', zorder=10)
-    plt.hlines(noise_floor, 0, 20000, colors='gr', linestyles='-', zorder=10)
-    plt.xlim([1, 20000])
+    plt.xlim([20, 20000])
+    # plt.xlim([500, 1500])
     plt.legend()
     plt.show()
 
 
-def main(input=None, noise=None):
-    time, samples = load_data(input)
+def main(signal_file, noise=None):
+    time, samples = load_data(signal_file)
 
     noise_time, noise_samples = None, None
     if noise is not None:
@@ -121,4 +182,12 @@ def main(input=None, noise=None):
 
 
 if __name__ == '__main__':
-    main(input='right2.csv', noise='noise.csv')
+    if len(sys.argv) < 2:
+        print('Error: must specify input CSV with timestamps and voltage measurements.')
+        sys.exit(1)
+
+    noise_file = None
+    if len(sys.argv) == 3:
+        noise_file = sys.argv[2]
+
+    main(signal_file=sys.argv[1], noise=noise_file)
