@@ -138,7 +138,6 @@ def calculate_thdn(freq, spectrum_fft, fundamental=1000, fundamental_skirt=50):
     print('THDN (dB): {}'.format(20 * np.log10(thdn_unscaled)))
 
 
-
 def analyze(time, samples, noise_time=None, noise_samples=None):
     sample_time = time[1] - time[0]
 
@@ -182,6 +181,58 @@ def analyze(time, samples, noise_time=None, noise_samples=None):
     calculate_thdn(f, samples_fft * energy_weight_factor)
 
 
+def reference_analysis():
+    sample_rate_hz = 192 * 1000
+    sample_time_s = 1.0/sample_rate_hz
+    duration_s = 1
+    n_samples = sample_rate_hz * duration_s
+    amplitude_V = 6
+    freq_hz = 1 * 1000
+    t = np.linspace(0, duration_s - sample_time_s, num=n_samples)
+    s = amplitude_V * np.sin(2 * np.pi * freq_hz * t)
+
+    # Plot the ideal window signal
+    s_fft = scipy.fftpack.rfft(s) * 2 / len(s)
+    f_fft = scipy.fftpack.rfftfreq(len(s_fft), d=1 / sample_rate_hz)
+    plt.plot(f_fft, 20*np.log10(np.abs(s_fft)), label='Ideal sample window')
+
+    # Drop some samples at the beginning and end of the ideal samples
+    first_sample = 101
+    last_sample = len(s) - 67
+
+    windowed_samples = s[first_sample:last_sample]
+    window_fft = scipy.fftpack.rfft(windowed_samples) * 2 / len(windowed_samples)
+    f_window_fft = scipy.fftpack.rfftfreq(len(window_fft), d=1/sample_rate_hz)
+
+    # Plot the FFT of the modified sample window
+    plt.figure(1)
+    plt.plot(f_window_fft, 20*np.log10(np.abs(window_fft)), color='r', label='Offset sample window')
+
+    # Apply the hanning window and perform fourier transform
+    window = np.kaiser(len(windowed_samples), beta=14)
+    scaled_samples = window * windowed_samples
+    hanning_fft = scipy.fftpack.rfft(scaled_samples) * 2 / len(scaled_samples)
+    f_hanning = scipy.fftpack.rfftfreq(len(hanning_fft), d=1/sample_rate_hz)
+
+    plt.plot(f_hanning, 20*np.log10(np.abs(hanning_fft)), color='green', label='Offset w/Kaiser beta=14')
+
+    V_rms = np.sqrt(np.sum(s ** 2) / len(s))
+    V_rms_windowed = np.sqrt(np.sum(windowed_samples ** 2) / len(windowed_samples))
+    V_rms_hanning = np.sqrt(np.sum(scaled_samples ** 2) / len(scaled_samples))
+    print('V_rms (Ideal): {}'.format(V_rms))
+    print('V_rms_windowed: {}'.format(V_rms_windowed))
+    print('V_rms_hanning: {}'.format(V_rms_hanning))
+
+    plt.xlabel('Frequency (Hz)')
+    plt.ylabel('dBV')
+    plt.xscale('log')
+    plt.xlim([20, 20000])
+    plt.grid(True, which='both')
+    plt.title('Spectrum (dBV) vs Frequency (Hz) of 1kHz sine wave')
+    plt.legend()
+    plt.show()
+
+
 def main(signal_file, noise=None):
     time, samples = load_data(signal_file)
 
@@ -195,44 +246,12 @@ def main(signal_file, noise=None):
     # plot_db_spectrum_hanning(time, samples)
 
 
-def reference_analysis():
-    sample_rate_hz = 192 * 1000
-    duration_s = 1
-    n_samples = sample_rate_hz * duration_s
-    amplitude_V = 6
-    freq_hz = 1 * 1000
-    t = np.linspace(0, duration_s, num=n_samples)
-    s = amplitude_V * np.sin(2 * np.pi * freq_hz * t)
-
-    # Plot the initial signal
-    plt.subplot(2, 1, 1)
-    plt.plot(t, s)
-    plt.xlim([0, 0.050])
-    plt.xlabel('Time (s)')
-    plt.ylabel('Volts')
-
-    s_fft = scipy.fftpack.rfft(s) * 2 / len(s)
-    f_fft = scipy.fftpack.rfftfreq(len(s_fft), d=1/sample_rate_hz)
-    print('Maximum abs: {}'.format(max(np.abs(s_fft))))
-
-    # Plot the FFT
-    plt.subplot(2, 1, 2)
-    plt.plot(f_fft, np.abs(s_fft))
-    plt.xlabel('Frequency (Hz)')
-    plt.ylabel('Abs(FFT)')
-    plt.xlim([500, 1500])
-
-    plt.show()
-
-
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print('Error: must specify input CSV with timestamps and voltage measurements.')
-        sys.exit(1)
+        reference_analysis()
+    else:
+        noise_file = None
+        if len(sys.argv) == 3:
+            noise_file = sys.argv[2]
 
-    noise_file = None
-    if len(sys.argv) == 3:
-        noise_file = sys.argv[2]
-
-    main(signal_file=sys.argv[1], noise=noise_file)
-    # reference_analysis()
+        main(signal_file=sys.argv[1], noise=noise_file)
